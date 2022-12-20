@@ -1,0 +1,160 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    "alpha.water.*"
+    {
+        nAlphaCorr      2;
+        nAlphaSubCycles 1;
+        cAlpha          1;
+        MULESCorr       yes;
+        nLimiterIter    3;
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-10;
+        relTol          0;
+    }
+    cellMotionUx
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-10;
+        relTol          0;
+    }
+    cellMotionUxFinal
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-10;
+        relTol          0;
+    }
+    pcorr
+    {
+/*
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-07;//1e-10;
+        relTol          0;
+*/
+        solver          GAMG;
+        tolerance       1e-10;
+        relTol          0;
+        smoother        DIC;
+        nPreSweeps      0;
+        nPostSweeps     2;
+        nFinestSweeps   2;
+        cacheAgglomeration true;
+        nCellsInCoarsestLevel 10;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
+
+    }
+    pcorrFinal
+    {
+/*
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-07;//1e-10;
+        relTol          0;
+*/
+        solver          GAMG;
+        tolerance       1e-10;
+        relTol          0;
+        smoother        DIC;
+        nPreSweeps      0;
+        nPostSweeps     2;
+        nFinestSweeps   2;
+        cacheAgglomeration true;
+        nCellsInCoarsestLevel 10;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
+    
+    }
+	"(p|p_rgh)"
+    {
+        solver          GAMG;
+        tolerance       1e-10;
+        relTol          0;
+        smoother        DIC;
+        nPreSweeps      0;
+        nPostSweeps     2;
+        nFinestSweeps   2;
+        cacheAgglomeration true;
+        nCellsInCoarsestLevel 10;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
+    }
+    "(p|p_rgh)Final"
+    {
+        solver          GAMG;
+        tolerance       1e-10;
+        relTol          0;
+        smoother        DIC;
+        nPreSweeps      0;
+        nPostSweeps     2;
+        nFinestSweeps   2;
+        cacheAgglomeration true;
+        nCellsInCoarsestLevel 10;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
+    }
+
+    U
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-10;
+        relTol          0;
+        nSweeps         1;
+    }
+    UFinal
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-10;
+        relTol          0;
+        nSweeps         1;
+    }
+    "(flm|fmm)"
+    {
+        solver          smoothSolver;
+        smoother        DILUGaussSeidel;
+        tolerance       1e-10;//1e-10;
+        relTol          0;
+    }
+
+    "(flm|fmm)Final"
+    {
+        solver          smoothSolver;
+        smoother        DILUGaussSeidel;
+        tolerance       1e-10;//1e-10;
+        relTol          0;
+    }
+}
+PIMPLE
+{
+    momentumPredictor no;
+    nCorrectors     3;
+    nNonOrthogonalCorrectors 0;
+    nAlphaCorr      1;
+    nAlphaSubCycles 2;
+    cAlpha          1;
+}
+
+
+// ************************************************************************* //

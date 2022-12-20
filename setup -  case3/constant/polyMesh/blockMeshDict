@@ -1,0 +1,126 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+|       o          |                                                          |
+|    o     o       | HELYX-OS                                                  |
+|   o   O   o      | Version: v2.4.0                                           |
+|    o     o       | Web:     http://www.engys.com                            |
+|       o          |                                                          |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    location system;
+    object blockMeshDict;
+}
+/*---------------------------------------------------------------------------*/
+    convertToMeters 1;
+    vertices  
+    (
+      ( -1.0 0.0 -13.25) //0
+      (  7.0 0.0 -13.25) //1
+      ( 44.0 0.0 -13.25) //2
+      ( 44.0 0.0  13.25) //3
+      (  7.0 0.0  13.25) //4     
+      ( -1.0 0.0  13.25) //5
+
+      ( -1.0 0.7425 -13.25) //6
+      (  7.0 0.7425 -13.25) //7
+      ( 44.0 0.7425 -13.25) //8
+      ( 44.0 0.7425  13.25) //9
+      (  7.0 0.7425  13.25) //10     
+      ( -1.0 0.7425  13.25) //11
+    );
+    blocks  
+    ( 
+      hex (0 1 7 6 5 4 10 11) (97 27 322) simpleGrading (1 1 1)
+      hex (1 2 8 7 4 3 9 10)  (449 27 322) simpleGrading (1 1 1)
+    );
+    edges  
+    (
+    );
+    boundary 
+    ( 
+    inlet
+    {
+      type patch;
+      faces
+      (
+	(0 5 11 6)
+      );
+    }
+    backWall
+    {
+      type wall;
+      faces
+      (
+	(2 8 9 3)
+      );
+    }
+    sideWallS
+    {
+      type patch;
+      faces
+      (
+	(0 6 7 1)
+    (5 4 10 11)
+	   );
+    }
+	sideWallNS
+    {
+      type wall;
+      faces
+      (
+    (1 7 8 2)
+	(4 3 9 10)
+      );
+    }
+    lowerWallS
+    {
+      type patch;
+      faces
+      (
+	(0 1 4 5)
+      );
+    }
+	lowerWallNS
+    {
+      type wall;
+      faces
+      (
+    (1 2 3 4)
+      );
+    }
+    atmosphereS
+    {
+      type patch;
+      faces
+      (
+	(11 10 7 6)
+      );
+    }
+	atmosphereNS
+    {
+      type patch;
+      faces
+      (
+	(10 9 8 7)
+      );
+    }
+	
+    );
+
+    mergePatchPairs  
+    (
+    );
+
+
+
+
+
+
+
+
+
+
+

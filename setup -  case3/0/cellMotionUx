@@ -1,0 +1,72 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.1                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      motionU;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    inlet
+    {
+        type             uniformFixedValue;
+		uniformValue	tableFile;
+		tableFileCoeffs
+		{
+		fileName	"piston.dat";
+        outOfBounds      clamp;
+		}
+    }
+    sideWallS
+    {
+        type            slip;
+    }   
+	lowerWallS
+    {
+        type            slip;
+    }
+	atmosphereS
+    {
+        type            slip;
+    }
+	sideWallNS
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }  
+	breakwater
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    lowerWallNS
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    atmosphereNS
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+	backWall
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }  
+}
+
+// ************************************************************************* //

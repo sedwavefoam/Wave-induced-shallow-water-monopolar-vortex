@@ -1,0 +1,31 @@
+# Wavefront OBJ file written 2018-03-11T17:50:17
+o breakwater_edgeMesh
+
+# points : 8
+# lines  : 12
+
+# <points count="8">
+v 7.395 0 -13.25
+v 7.9905 0.75 -13.25
+v 7.9905 0 -13.25
+v 7.395 0.75 -13.25
+v 19.896 0 10.135
+v 19.896 0.75 10.135
+v 20.416 0 9.841
+v 20.416 0.75 9.841
+# </points>
+
+# <edges count="12">
+l 2 3
+l 3 1
+l 1 4
+l 4 2
+l 1 5
+l 5 6
+l 6 4
+l 5 7
+l 7 8
+l 8 6
+l 2 8
+l 7 3
+# </edges>
